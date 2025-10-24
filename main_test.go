@@ -7,79 +7,100 @@ import (
 )
 
 // Пишите тесты в этом файле
-func TestGenerateRandomElementsWhenSizeIsZero(t *testing.T) {
-	size := 0
-	slice := generateRandomElements(size)
+func TestGenerateRandomElements(t *testing.T) {
+	type testCase struct {
+		name     string
+		input    int
+		expected int
+	}
 
-	assert.Equal(t, size, len(slice))
+	testCases := []testCase{
+		{
+			name:     "zero number",
+			input:    0,
+			expected: 0,
+		},
+		{
+			name:     "negative number",
+			input:    -1,
+			expected: 0,
+		},
+		{
+			name:     "size is not zero",
+			input:    10,
+			expected: 10,
+		},
+	}
+
+	for _, tt := range testCases {
+		t.Run(tt.name, func(t *testing.T) {
+			actual := generateRandomElements(tt.input)
+
+			assert.Equal(t, tt.expected, len(actual))
+		})
+	}
 }
 
-func TestGenerateRandomElementsWhenSizeIsNegative(t *testing.T) {
-	size := -1
-	slice := generateRandomElements(size)
+func TestMaximum(t *testing.T) {
+	type testCase struct {
+		name     string
+		input    []int
+		expected int
+	}
 
-	assert.Equal(t, 0, len(slice))
-}
+	testCases := []testCase{
+		{
+			name:     "zero number",
+			input:    []int{},
+			expected: 0,
+		},
+		{
+			name:     "positive number",
+			input:    []int{1, 10, 9, 8, 4, 3, 2, 7, 6, 5},
+			expected: 10,
+		},
+	}
 
-func TestGenerateRandomElementsWhenSizeIsNotZero(t *testing.T) {
-	size := 10
-	slice := generateRandomElements(size)
+	for _, tt := range testCases {
+		t.Run(tt.name, func(t *testing.T) {
+			actual := maximum(tt.input)
 
-	assert.Equal(t, size, len(slice))
-}
-
-func TestMaximumWhenSizeIsZero(t *testing.T) {
-	data := make([]int, 0)
-	maxNum := maximum(data)
-
-	assert.Equal(t, 0, maxNum)
-}
-
-func TestMaximumWhenSizeIsNotZeroWithPositiveNums(t *testing.T) {
-	data := []int{1, 10, 9, 8, 4, 3, 2, 7, 6, 5}
-	correctMaxNum := 10
-	maxNum := maximum(data)
-
-	assert.Equal(t, correctMaxNum, maxNum)
-}
-
-func TestMaximumWhenSizeIsNotZeroWithNegativeNums(t *testing.T) {
-	data := []int{-1, -10, -9, -8, -4, -3, -2, -7, -6, -5}
-	correctMaxNum := -1
-	maxNum := maximum(data)
-
-	assert.Equal(t, correctMaxNum, maxNum)
+			assert.Equal(t, tt.expected, actual)
+		})
+	}
 }
 
 func TestMaxChunksWhenSizeIsZero(t *testing.T) {
-	data := make([]int, 0)
-	maxNum := maxChunks(data)
+	type testCase struct {
+		name     string
+		input    []int
+		expected int
+	}
 
-	assert.Equal(t, 0, maxNum)
-}
-
-func TestMaxChunksWhenSizeIsNotZeroWithPositiveNums(t *testing.T) {
 	data := make([]int, SIZE)
 
 	for i := 0; i < SIZE; i += 1 {
 		data[i] = i + 1
 	}
 
-	correctMaxNum := SIZE
-	maxNum := maxChunks(data)
-
-	assert.Equal(t, correctMaxNum, maxNum)
-}
-
-func TestMaxChunksWhenSizeIsNotZeroWithNegativeNums(t *testing.T) {
-	data := make([]int, SIZE)
-
-	for i := 0; i < SIZE; i += 1 {
-		data[i] = -(i + 1)
+	testCases := []testCase{
+		{
+			name:     "zero number",
+			input:    []int{},
+			expected: 0,
+		},
+		{
+			name:     "positive number",
+			input:    data,
+			expected: SIZE,
+		},
 	}
 
-	correctMaxNum := -1
-	maxNum := maxChunks(data)
+	for _, tt := range testCases {
+		t.Run(tt.name, func(t *testing.T) {
+			actual := maxChunks(tt.input)
 
-	assert.Equal(t, correctMaxNum, maxNum)
+			assert.Equal(t, tt.expected, actual)
+		})
+	}
 }

@@ -72,14 +72,10 @@ func maxChunks(data []int) int {
 
 		wg.Add(1)
 
-		go func(data, maxNums []int, currentIndex, startIndex, endIndex int) {
+		go func(data, maxNums []int, currentIndex int) {
 			defer wg.Done()
-
-			subSlice := data[startIndex:endIndex]
-			maxNum := maximum(subSlice)
-			maxNums[currentIndex] = maxNum
-
-		}(data, maxNums, currentIndex, startIndex, endIndex)
+			maxNums[currentIndex] = maximum(data)
+		}(data[startIndex:endIndex], maxNums, currentIndex)
 	}
 
 	wg.Wait()
