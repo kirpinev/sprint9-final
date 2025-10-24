@@ -33,11 +33,8 @@ func TestGenerateRandomElements(t *testing.T) {
 	}
 
 	for _, tt := range testCases {
-		t.Run(tt.name, func(t *testing.T) {
-			actual := generateRandomElements(tt.input)
-
-			assert.Equal(t, tt.expected, len(actual), tt.name)
-		})
+		actual := generateRandomElements(tt.input)
+		assert.Equal(t, tt.expected, len(actual), tt.name)
 	}
 }
 
@@ -62,11 +59,8 @@ func TestMaximum(t *testing.T) {
 	}
 
 	for _, tt := range testCases {
-		t.Run(tt.name, func(t *testing.T) {
-			actual := maximum(tt.input)
-
-			assert.Equal(t, tt.expected, actual, tt.name)
-		})
+		actual := maximum(tt.input)
+		assert.Equal(t, tt.expected, actual, tt.name)
 	}
 }
 
@@ -97,10 +91,7 @@ func TestMaxChunksWhenSizeIsZero(t *testing.T) {
 	}
 
 	for _, tt := range testCases {
-		t.Run(tt.name, func(t *testing.T) {
-			actual := maxChunks(tt.input)
-
-			assert.Equal(t, tt.expected, actual, tt.name)
-		})
+		actual := maxChunks(tt.input)
+		assert.Equal(t, tt.expected, actual, tt.name)
 	}
 }
